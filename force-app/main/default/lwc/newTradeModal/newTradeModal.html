@@ -1,0 +1,67 @@
+<template>
+    <div class="container">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Cancel" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </header>
+                <div class="main slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="first_block">
+                        <div>
+                            <lightning-combobox
+                            label="Sell Currency"
+                            required="true"
+                            value={value}
+                            placeholder="Select Currency"
+                            options={currencies}
+                            onchange={handleSellCurrencyChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div>
+                            <p>Rate</p>
+                            <template if:true={rate}>
+                                {rate}
+                            </template>
+                        </div>
+                        <div>
+                            <lightning-combobox
+                            label="Buy Currency"
+                            required="true"
+                            value={value}
+                            placeholder="Select Currency"
+                            options={currencies}
+                            onchange={handleBuyCurrencyChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                    <div class="second_block">
+                        <div>
+                            <lightning-input
+                            label="Sell Amount"
+                            required="true"
+                            onchange={handleSellAmountChange}>
+                            </lightning-input>
+                        </div>
+                        <div>
+                            <lightning-input
+                            disabled="true"
+                            type="text"
+                            label="Buy Amount"
+                            value={buyAmount}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <lightning-button class="button" label="Create" onclick={createTrade}></lightning-button>
+                        <lightning-button class="button" label="Cancel" onclick={closeModal}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>

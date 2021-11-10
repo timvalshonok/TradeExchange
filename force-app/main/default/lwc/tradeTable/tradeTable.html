@@ -1,0 +1,37 @@
+<template>
+    <template if:true={listTrades}>
+        <lightning-card title="Trades">
+            <lightning-button onclick={showNewTradeModal} label="New Trade" slot="actions"></lightning-button>
+        </lightning-card>
+        <table class="slds-table">
+            <thead class="slds-table">
+                <tr>
+                    <th>Sell CCY</th>
+                    <th>Sell Amount</th>
+                    <th>Buy CCY</th>
+                    <th>Buy Amount</th>
+                    <th>Rate</th>
+                    <th>Date Booked</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={listTrades} for:item="trade">
+                    <tr key={trade.Trade_Id__c}>
+                        <td>{trade.Sell_Currency__c}</td>
+                        <td>{trade.Sell_Amount__c}</td>
+                        <td>{trade.Buy_Currency__c}</td>
+                        <td>{trade.Buy_Amount__c}</td>
+                        <td>{trade.Rate__c}</td>
+                        <td>{trade.Date_Booked__c}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+    <template if:false={listTrades}>
+        <lightning-spinner alternative-text="Please, wait a second" size="medium"></lightning-spinner>
+    </template>
+    <template if:true={newTradeModal}>
+        <c-new-trade-modal onclose={hideNewTradeModal} onrerendertrades={rerenderTrades}></c-new-trade-modal>
+    </template>
+</template>

@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    height: 700px
+}
+.container {
+    height: 700px;
+}
+.main {
+    height: 200px;
+}
+.first_block {
+    display: flex;
+    justify-content: space-between;
+}
+.second_block {
+    display: flex;
+    justify-content: space-between;
+}
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+.button {
+    font-size: 14px;
+}
