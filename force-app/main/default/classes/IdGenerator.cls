@@ -4,7 +4,7 @@ public inherited sharing class IdGenerator {
         Integer length = 8;
         Blob blobKey = crypto.generateAesKey(128);
         String key = EncodingUtil.convertToHex(blobKey);
-        String generatedId = 'TR' + key.substring(0,length).toUpperCase();
+        String generatedId = 'TR' + key.substring(0, length).toUpperCase();
 
         return generatedId;
     }
