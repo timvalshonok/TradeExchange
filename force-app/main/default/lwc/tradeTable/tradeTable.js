@@ -8,7 +8,7 @@ export default class TradeTable extends LightningElement {
     newTradeModal;
 
     @wire(getTrades)
-    wiredTrades(result){
+    wiredTrades(result) {
         this.tradesResponse = result;
         if(result.data){
             this.listTrades = result.data;
@@ -17,15 +17,15 @@ export default class TradeTable extends LightningElement {
         }
     }
 
-    showNewTradeModal(event){
+    showNewTradeModal(event) {
         this.newTradeModal = true;
     }
 
-    hideNewTradeModal(event){
+    hideNewTradeModal(event) {
         this.newTradeModal = false;
     }
 
-    rerenderTrades(event){
+    rerenderTrades(event) {
         refreshApex(this.tradesResponse);
     }
 }
