@@ -19,25 +19,25 @@ export default class NewTradeModal extends LightningElement {
     rate;
     dateBooked;
 
-    handleSellCurrencyChange(event){
+    handleSellCurrencyChange(event) {
         this.sellCurrency = event.target.value;
     }
 
-    handleBuyCurrencyChange(event){
+    handleBuyCurrencyChange(event) {
         this.buyCurrency = event.target.value;
         this.calculateRate();
     }
 
-    handleSellAmountChange(event){
+    handleSellAmountChange(event) {
         this.sellAmount = event.target.value;
         this.calculateRate();
     }
 
-    closeModal(){
+    closeModal() {
         this.dispatchEvent(new CustomEvent('close'));
     }
 
-    calculateRate(){
+    calculateRate() {
         if(this.sellCurrency == this.buyCurrency){
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -51,11 +51,9 @@ export default class NewTradeModal extends LightningElement {
         getRate({sellCurrency: this.sellCurrency, buyCurrency: this.buyCurrency})
         .then((response) => {
             this.rate = parseFloat(response).toFixed(2);
-            console.log(this.rate);
             this.buyAmount = (this.sellAmount * this.rate).toFixed(2);
         })
         .catch((error) => {
-            console.log(error);
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Error',
@@ -66,7 +64,7 @@ export default class NewTradeModal extends LightningElement {
         })
     }
 
-    createTrade(){
+    createTrade() {
         let trade = {
             Sell_Currency__c : this.sellCurrency,
             Sell_Amount__c : this.sellAmount,
@@ -74,7 +72,7 @@ export default class NewTradeModal extends LightningElement {
             Buy_Amount__c : this.buyAmount,
             Rate__c : this.rate
         };
-        if(!this.sellAmount || !this.buyCurrency || !this.sellCurrency || !this.rate || !this.buyAmount){
+        if(!this.sellAmount || !this.buyCurrency || !this.sellCurrency || !this.rate || !this.buyAmount) {
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Error',
@@ -86,7 +84,6 @@ export default class NewTradeModal extends LightningElement {
         }
         addNewTrade({newTrade: trade})
         .then(() => {
-            console.log(trade);
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Success',
