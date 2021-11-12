@@ -1,13 +1,13 @@
 @isTest
-public class TestTradeController {
-    @TestSetup static void setup(){
+public class TradeControllerTest {
+    @TestSetup static void setup() {
         List<Trade__c> trades = new List<Trade__c>();
         Trade__c trade = new Trade__c(Rate__c = 1.00);
         trades.add(trade);
         insert trades;
     }
 
-    @isTest public static void testGetTrades(){
+    @isTest public static void getTradesTest() {
         Test.startTest();
         List<Trade__c> actual = TradeController.getTrades();
         Test.stopTest();
@@ -16,7 +16,7 @@ public class TestTradeController {
         System.assertEquals(expected[0].Rate__c, actual[0].Rate__c, 'Should be one Trade with "Rate = 1.00"');
     }
 
-    @isTest public static void testGetRate(){
+    @isTest public static void getRateTest() {
         String sellCurrency = 'USD';
         String buyCurrency = 'JPY';
 
@@ -29,7 +29,7 @@ public class TestTradeController {
         System.assertEquals(actual, expected, 'Should be Rate with value = "114.016546229726157542510619475975"');
     }
 
-    @isTest public static void testAddNewTrade(){
+    @isTest public static void addNewTradeTest() {
         Decimal rate = 2.00;
         Trade__c trade = new Trade__c(Rate__c = rate);
 
