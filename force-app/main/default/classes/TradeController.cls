@@ -1,7 +1,7 @@
 public inherited sharing class TradeController {
 
     @AuraEnabled(cacheable=true)
-    public static List<Trade__c> getTrades(){
+    public static List<Trade__c> getTrades() {
         List<Trade__c> result = [
             SELECT Sell_Currency__c, Sell_Amount__c, Buy_Currency__c, 
             Buy_Amount__c, Rate__c, Date_Booked__c, Trade_Id__c
@@ -13,7 +13,7 @@ public inherited sharing class TradeController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static Decimal getRate(String sellCurrency, String buyCurrency){
+    public static Decimal getRate(String sellCurrency, String buyCurrency) {
         Decimal result;
         Http http = new Http();
         HttpRequest request = new HttpRequest();
@@ -23,7 +23,6 @@ public inherited sharing class TradeController {
         requestEndpoint += '?access_key=' + access_key;
         requestEndpoint += '&base=EUR';
         requestEndpoint += '&symbols=' + sellCurrency + ',' + buyCurrency;
-        System.Debug('REQUEST' + requestEndpoint);
         request.setEndpoint(requestEndpoint);
         request.setMethod('GET');
 
@@ -35,7 +34,7 @@ public inherited sharing class TradeController {
         return result;
     }
 
-    private static Decimal getRateFromJSON(JSONParser parser, String sellCurrency, String buyCurrency){
+    private static Decimal getRateFromJSON(JSONParser parser, String sellCurrency, String buyCurrency) {
         Decimal sellCurrencyRateFromJSON;
         Decimal buyCurrencyRateFromJSON;
         while(parser.nextToken() != null){
@@ -53,7 +52,7 @@ public inherited sharing class TradeController {
     }
 
     @AuraEnabled(cacheable=false)
-    public static Trade__c addNewTrade(Trade__c newTrade){
+    public static Trade__c addNewTrade(Trade__c newTrade) {
         insert newTrade;
         return newTrade;
     }
