@@ -10,9 +10,9 @@ export default class TradeTable extends LightningElement {
     @wire(getTrades)
     wiredTrades(result) {
         this.tradesResponse = result;
-        if(result.data){
+        if(result.data) {
             this.listTrades = result.data;
-        } else if(result.error){
+        } else if(result.error) {
             this.listTrades = result.error;
         }
     }
