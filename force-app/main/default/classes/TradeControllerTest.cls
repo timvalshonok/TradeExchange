@@ -1,5 +1,6 @@
 @isTest
 public class TradeControllerTest {
+    
     @TestSetup static void setup() {
         List<Trade__c> trades = new List<Trade__c>();
         Trade__c trade = new Trade__c(Rate__c = 1.00);
