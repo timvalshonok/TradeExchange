@@ -2,19 +2,19 @@ public inherited sharing class TradeController {
 
     @AuraEnabled(cacheable=true)
     public static List<Trade__c> getTrades() {
-        List<Trade__c> result = [
+        List<Trade__c> trades = [
             SELECT Sell_Currency__c, Sell_Amount__c, Buy_Currency__c, 
-            Buy_Amount__c, Rate__c, Date_Booked__c, Trade_Id__c
+                Buy_Amount__c, Rate__c, Date_Booked__c, Trade_Id__c
             FROM Trade__c
             ORDER BY Date_Booked__c
             LIMIT 50
         ];
-        return result;
+        return trades;
     }
 
     @AuraEnabled(cacheable=true)
     public static Decimal getRate(String sellCurrency, String buyCurrency) {
-        Decimal result;
+        Decimal rate;
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         String access_key = '1b08ae714e18312b49506f257e20ae0f';
@@ -27,23 +27,22 @@ public inherited sharing class TradeController {
         request.setMethod('GET');
 
         HttpResponse response = http.send(request);
-        if(response.getStatusCode() == 200){
+        if(response.getStatusCode() == 200) {
             JSONParser parser = JSON.createParser(response.getBody());
-            result = TradeController.getRateFromJSON(parser, sellCurrency, buyCurrency);
+            rate = TradeController.getRateFromJSON(parser, sellCurrency, buyCurrency);
         }
-        return result;
+        return rate;
     }
 
     private static Decimal getRateFromJSON(JSONParser parser, String sellCurrency, String buyCurrency) {
         Decimal sellCurrencyRateFromJSON;
         Decimal buyCurrencyRateFromJSON;
-        while(parser.nextToken() != null){
-            System.Debug(parser.getText());
-            if(parser.getText() == sellCurrency){
+        while(parser.nextToken() != null) {
+            if(parser.getText() == sellCurrency) {
                 parser.nextToken();
                 sellCurrencyRateFromJSON = parser.getDecimalValue();
             }
-            if(parser.getText() == buyCurrency){
+            if(parser.getText() == buyCurrency) {
                 parser.nextToken();
                 buyCurrencyRateFromJSON = parser.getDecimalValue();
             }
