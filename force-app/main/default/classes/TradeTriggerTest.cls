@@ -1,5 +1,6 @@
 @isTest
 private class TradeTriggerTest {
+    
     @isTest static void generateIdTest() {
         Trade__c trade = new Trade__c(Rate__c = 1.00);
 
