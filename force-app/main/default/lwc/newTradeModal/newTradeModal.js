@@ -38,7 +38,7 @@ export default class NewTradeModal extends LightningElement {
     }
 
     calculateRate() {
-        if(this.sellCurrency == this.buyCurrency){
+        if(this.sellCurrency == this.buyCurrency) {
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Error',
