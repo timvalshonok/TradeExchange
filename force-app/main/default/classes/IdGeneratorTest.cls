@@ -1,5 +1,6 @@
 @isTest
 public class IdGeneratorTest {
+    
     @isTest public static void generateRandomAlphanumericIdTest() {
         Test.startTest();
         String Id = IdGenerator.generateRandomAlphanumericId();
